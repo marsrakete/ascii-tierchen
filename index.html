@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>ASCII Tierchen</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #111;
+      color: #eee;
+      text-align: center;
+      padding: 2em;
+    }
+    pre {
+      font-size: 1.5em;
+      line-height: 1.2;
+    }
+    button {
+      margin: 0.5em;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ASCII Tierchen</h1>
+
+  <pre id="ascii-art">
+(\_/)
+(•_•)
+/ >🧊
+  </pre>
+
+  <button onclick="changeItem()">Gegenstand wechseln</button>
+  <button onclick="changeAnimal()">Tier wechseln</button>
+
+  <script>
+    let currentAnimalIndex = 0;
+    let currentItem = '🧊';
+
+    const items = ['🧊', '🥕', '🍫', '🪵', '🍎', '🧁', '🍪', '🌭', '🍓', '🍇'];
+    const animalList = ['bunny', 'cat', 'dog', 'duck', 'mouse', 'frog', 'bear', 'snail', 'owl'];
+
+    const animals = {
+      bunny: (item) => `(\\_/)
+(•_•)
+/ >${item}`,
+
+      cat: (item) => `=^.^=
+( o.o )
+ >${item}`,
+
+      dog: (item) => `^__^
+(oo)\\_______
+(__)\\       )\\
+    ||----w |
+    ||     || ${item}`,
+
+      duck: (item) => ` __
+<(o )___
+ ( ._>  ${item}
+  \___)` ,
+
+      mouse: (item) => `(' .')
+(o_o )
+(")(") ${item}`,
+
+      frog: (item) => ` @..@
+(----)
+( >${item} )
+ ^^ ^^`,
+
+      bear: (item) => `ʕ•ᴥ•ʔ
+(  ${item}  )`,
+
+      snail: (item) => `  _____
+ /     \
+( o  o )
+o\_^_/o ${item}`,
+
+      owl: (item) => ` ,_,
+(o,o)
+(   )
+"-" ${item}`
+    };
+
+    function changeItem() {
+      currentItem = items[Math.floor(Math.random() * items.length)];
+      updateArt();
+    }
+
+    function changeAnimal() {
+      currentAnimalIndex = (currentAnimalIndex + 1) % animalList.length;
+      updateArt();
+    }
+
+    function updateArt() {
+      const animalKey = animalList[currentAnimalIndex];
+      const art = animals[animalKey](currentItem);
+      document.getElementById('ascii-art').textContent = art;
+    }
+  </script>
+
+</body>
+</html>
