@@ -35,6 +35,7 @@
 
   <button onclick="changeItem()">Gegenstand wechseln</button>
   <button onclick="changeAnimal()">Tier wechseln</button>
+  <button onclick="copyArt()">Bild kopieren</button>
 
   <script>
     let currentAnimalIndex = 0;
@@ -61,7 +62,7 @@
       duck: (item) => ` __
 <(o )___
  ( ._>  ${item}
-  \___)` ,
+  \\___)` ,
 
       mouse: (item) => `(' .')
 (o_o )
@@ -76,9 +77,9 @@
 (  ${item}  )`,
 
       snail: (item) => `  _____
- /     \
+ /     \\
 ( o  o )
-o\_^_/o ${item}`,
+o\\_^_/o ${item}`,
 
       owl: (item) => ` ,_,
 (o,o)
@@ -100,6 +101,15 @@ o\_^_/o ${item}`,
       const animalKey = animalList[currentAnimalIndex];
       const art = animals[animalKey](currentItem);
       document.getElementById('ascii-art').textContent = art;
+    }
+
+    function copyArt() {
+      const text = document.getElementById('ascii-art').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Bild wurde in die Zwischenablage kopiert!");
+      }).catch(err => {
+        alert("Kopieren fehlgeschlagen: " + err);
+      });
     }
   </script>
 
