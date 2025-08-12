@@ -4,19 +4,37 @@
   <meta charset="UTF-8">
   <title>ASCII Tierchen</title>
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
     body {
       font-family: monospace;
       background: #111;
       color: #eee;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
       padding: 2em;
     }
     pre {
       font-size: 1.5em;
       line-height: 1.2;
+      min-height: 12em;
+      min-width: 20em;
+      display: inline-block;
+      white-space: pre-wrap;
+    }
+    .controls {
+      margin-top: 2em;
+      margin-bottom: 12em; /* Abstand nach oben */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      justify-content: center;
     }
     button {
-      margin: 0.5em;
       padding: 0.5em 1em;
       font-size: 1em;
       cursor: pointer;
@@ -25,25 +43,35 @@
 </head>
 <body>
 
-  <h1>ASCII Tierchen</h1>
-  <h2 id="animal-name">bunny</h2>
-
-  <pre id="ascii-art">
+  <div>
+    <h1>ASCII Tierchen</h1>
+    <h2 id="animal-name">bunny</h2>
+    <pre id="ascii-art">
 (\_/)
 (•_•)
 / >🧊
-  </pre>
+    </pre>
+  </div>
 
-  <button onclick="changeItem()">Gegenstand wechseln</button>
-  <button onclick="changeAnimal()">Tier wechseln</button>
-  <button onclick="copyArt()">Bild kopieren</button>
+  <div class="controls">
+    <button onclick="changeItem()">Gegenstand wechseln</button>
+    <button onclick="changeAnimal()">Tier wechseln</button>
+    <button onclick="copyArt()">Bild kopieren</button>
+  </div>
 
   <script>
     let currentAnimalIndex = 0;
     let currentItem = '🧊';
 
-    const items = ['🧊', '🥕', '🍫', '🪵', '🍎', '🧁', '🍪', '🌭', '🍓', '🍇'];
-    const animalList = ['bunny', 'cat', 'dog', 'duck', 'mouse', 'frog', 'bear', 'snail', 'owl'];
+    const items = [
+      '🧊', '🥕', '🍫', '🪵', '🍎', '🧁', '🍪', '🌭', '🍓', '🍇',
+      '🪙', '🍕', '🌮', '🍔', '🧀', '🍩', '🍌', '🥥', '🧃', '🍷'
+    ];
+
+    const animalList = [
+      'bunny', 'cat', 'dog', 'duck', 'mouse', 'frog', 'bear', 'snail', 'owl',
+      'tiger', 'penguin', 'crab', 'elephant'
+    ];
 
     const animals = {
       bunny: (item) => `(\\_/)
@@ -85,7 +113,28 @@ o\\_^_/o ${item}`,
       owl: (item) => ` ,_,
 (o,o)
 (   )
-"-" ${item}`
+"-" ${item}`,
+
+      tiger: (item) => `/\_/\
+( o.o )
+ > ^ < ${item}`,
+
+      penguin: (item) => `  _~_
+ (o o)
+ / V \\
+/(   )\\
+ ^^ ^^ ${item}`,
+
+      crab: (item) => `  (\_/)
+ (o.o)
+ <) )> ${item}`,
+
+      elephant: (item) => `  _.-- ,.--.
+ .'   .'     /
+ | @       |'..--------._
+ /      \\._/              '\
+/  .-.-                     \\
+\\_/   ${item}`
     };
 
     function changeItem() {
