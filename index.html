@@ -43,6 +43,7 @@
     <button onclick="changeItem()">Gegenstand wechseln</button>
     <button onclick="changeAnimal()">Tier wechseln</button>
     <button onclick="copyArt()">Bild kopieren</button>
+    <button onclick="copyArt(true)">Für Bluesky kopieren</button>
   </div>
 
   <script>
@@ -158,9 +159,10 @@ o\\_^_/o ${item}`,
       document.getElementById('animal-name').textContent = animalKey;
     }
 
-    function copyArt() {
+    function copyArt(forBluesky = false) {
       const text = document.getElementById('ascii-art').textContent;
-      navigator.clipboard.writeText(text).then(() => {
+      const clipboardText = forBluesky ? text.replace(/^ +/gm, spaces => "\u2002".repeat(spaces.length)) : text;
+      navigator.clipboard.writeText(clipboardText).then(() => {
         alert("Bild wurde in die Zwischenablage kopiert!");
       }).catch(err => {
         alert("Kopieren fehlgeschlagen: " + err);

@@ -33,7 +33,8 @@ Dann im Browser aufrufen: `http://localhost:8000`
 
 ```text
 ascii-tierchen/
-├── index.html         # Die komplette Web-App
+├── index.html         # HTML und JavaScript der Web-App
+├── style.css          # Layout und Gestaltung der Web-App
 ├── screenshot.png     # (Optional) Screenshot für README
 └── README.md          # Diese Datei
 ```
