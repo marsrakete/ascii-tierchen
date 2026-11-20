@@ -13,6 +13,7 @@ Du kannst Tiere und Gegenstände per Knopfdruck durchrotieren – und das aktuel
 - 🦋 **Für Bluesky kopieren**: Kopiert das Tierbild als Text und ersetzt die führenden Leerzeichen jeder Zeile durch breitere Halbgeviert-Leerzeichen (U+2002), damit die Einrückung in Blueskys proportionaler Schrift besser zur Geltung kommt.
 - 🖼️ **Als Bild kopieren**: Legt die aktuelle Zeichnung als PNG in die Zwischenablage.
 - ♿ **ALT-Text kopieren**: Kopiert Tierart, Gegenstand und die aktuelle ASCII-Zeichnung als Text für die Bildbeschreibung.
+- 🔗 **App teilen**: Öffnet das Teilen-Menü oder kopiert den öffentlichen App-Link in die Zwischenablage.
 - 🎨 **Dunkles Farbschema** für augenfreundliche Darstellung.
 
 ## 📦 Verwendung

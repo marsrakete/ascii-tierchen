@@ -172,10 +172,10 @@ function copyArt(forBluesky = false) {
   return copyText(clipboardText);
 }
 
-async function copyText(text) {
+async function copyText(text, successMessage = 'Kopiert!') {
   try {
     await navigator.clipboard.writeText(text);
-    showCopyStatus('Kopiert!');
+    showCopyStatus(successMessage);
   } catch {
     showCopyStatus('Kopieren fehlgeschlagen.');
   }
@@ -242,9 +242,23 @@ async function copyArtImage() {
   }
 }
 
+async function shareApp() {
+  const url = document.querySelector('meta[property="og:url"]').content;
+  if (typeof navigator.share === 'function') {
+    try {
+      await navigator.share({ title: document.title, url });
+      return;
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+    }
+  }
+  await copyText(url, 'Link kopiert!');
+}
+
 document.getElementById('change-item').addEventListener('click', changeItem);
 document.getElementById('change-animal').addEventListener('click', changeAnimal);
 document.getElementById('copy-art').addEventListener('click', () => copyArt());
 document.getElementById('copy-bluesky').addEventListener('click', () => copyArt(true));
 document.getElementById('copy-image').addEventListener('click', copyArtImage);
 document.getElementById('copy-alt-text').addEventListener('click', copyArtAltText);
+document.getElementById('share-app').addEventListener('click', shareApp);
