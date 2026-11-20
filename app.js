@@ -114,7 +114,7 @@ function copyArt(forBluesky = false) {
   const text = document.getElementById('ascii-art').textContent;
   const clipboardText = forBluesky ? text.replace(/^ +/gm, spaces => "\u2002".repeat(spaces.length)) : text;
   navigator.clipboard.writeText(clipboardText).then(() => {
-    alert("Bild wurde in die Zwischenablage kopiert!");
+    alert("Text wurde in die Zwischenablage kopiert!");
   }).catch(err => {
     alert("Kopieren fehlgeschlagen: " + err);
   });
