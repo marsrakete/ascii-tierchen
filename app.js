@@ -196,8 +196,6 @@ function renderArtPng() {
   const context = canvas.getContext('2d');
   const font = `${style.fontSize} ${style.fontFamily}`;
   const lineHeight = parseFloat(style.lineHeight);
-  const padding = Math.ceil(lineHeight * 0.75);
-  const scale = 3;
 
   context.font = font;
   const offsets = lines.map(() => 0);
@@ -209,16 +207,22 @@ function renderArtPng() {
 
   const leftEdge = Math.min(0, ...offsets);
   const rightEdge = Math.max(...lines.map((line, index) => offsets[index] + context.measureText(line).width));
-  canvas.width = Math.ceil((rightEdge - leftEdge + 2 * padding) * scale);
-  canvas.height = Math.ceil((lines.length * lineHeight + 2 * padding) * scale);
-  context.scale(scale, scale);
+  const artWidth = rightEdge - leftEdge;
+  const artHeight = lines.length * lineHeight;
+  canvas.width = 800;
+  canvas.height = 600;
+  const scale = Math.min(canvas.width * 0.75 / artWidth, canvas.height * 0.6 / artHeight);
+  const left = (canvas.width - artWidth * scale) / 2;
+  const top = (canvas.height - artHeight * scale) / 2;
   context.fillStyle = getComputedStyle(document.body).backgroundColor;
-  context.fillRect(0, 0, canvas.width / scale, canvas.height / scale);
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.translate(left, top);
+  context.scale(scale, scale);
   context.fillStyle = style.color;
   context.font = font;
   context.textBaseline = 'middle';
   lines.forEach((line, index) => {
-    context.fillText(line, padding - leftEdge + offsets[index], padding + (index + 0.5) * lineHeight);
+    context.fillText(line, offsets[index] - leftEdge, (index + 0.5) * lineHeight);
   });
 
   return new Promise((resolve, reject) => {
