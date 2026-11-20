@@ -8,9 +8,11 @@ Du kannst Tiere und Gegenstände per Knopfdruck durchrotieren – und das aktuel
 ## ✨ Funktionen
 
 - 🔁 **Tier wechseln**: Wähle zwischen Hase, Katze, Hund, Ente, Maus, Frosch, Bär, Schnecke und Eule.
-- 🍎 **Gegenstand wechseln**: Tiere halten zufällig einen Gegenstand (Emoji) wie 🧊, 🍓 oder 🧁.
+- 🍎 **Gegenstand wechseln**: Schaltet der Reihe nach durch die Gegenstände, etwa 🧊, 🍓 oder 🧁.
 - 📋 **Text kopieren**: Kopiert die ASCII-Zeichnung als Text in die Zwischenablage.
 - 🦋 **Für Bluesky kopieren**: Kopiert das Tierbild als Text und ersetzt die führenden Leerzeichen jeder Zeile durch breitere Halbgeviert-Leerzeichen (U+2002), damit die Einrückung in Blueskys proportionaler Schrift besser zur Geltung kommt.
+- 🖼️ **Als Bild kopieren**: Legt die aktuelle Zeichnung als PNG in die Zwischenablage.
+- ♿ **ALT-Text kopieren**: Kopiert Tierart, Gegenstand und die aktuelle ASCII-Zeichnung als Text für die Bildbeschreibung.
 - 🎨 **Dunkles Farbschema** für augenfreundliche Darstellung.
 
 ## 📦 Verwendung

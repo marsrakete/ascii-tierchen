@@ -45,3 +45,9 @@ button {
   font-size: 1em;
   cursor: pointer;
 }
+
+#copy-status {
+  min-height: 1.2em;
+  margin: 0;
+  text-align: center;
+}
