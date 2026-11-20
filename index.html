@@ -2,48 +2,34 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ASCII Tierchen</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    body {
-      font-family: monospace;
-      background: #111;
-      color: #eee;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2em;
-    }
-    pre {
-      font-size: 1.5em;
-      line-height: 1.2;
-      min-height: 12em;
-      min-width: 20em;
-      display: inline-block;
-      white-space: pre-wrap;
-    }
-    .controls {
-      margin-top: 2em;
-      margin-bottom: 12em; /* Abstand nach oben */
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1em;
-      justify-content: center;
-    }
-    button {
-      padding: 0.5em 1em;
-      font-size: 1em;
-      cursor: pointer;
-    }
-  </style>
+  <meta name="description" content="Kleine ASCII-Tiere mit wechselnden Gegenständen zum Anschauen und Kopieren.">
+  <meta name="theme-color" content="#111111">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="ASCII Tierchen">
+  <meta property="og:title" content="ASCII Tierchen">
+  <meta property="og:description" content="Kleine ASCII-Tiere mit wechselnden Gegenständen zum Anschauen und Kopieren.">
+  <meta property="og:url" content="https://marsrakete.github.io/ascii-tierchen/">
+  <meta property="og:image" content="https://marsrakete.github.io/ascii-tierchen/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ASCII Tierchen mit einem Hasen und einem blauen Eiswürfel.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ASCII Tierchen">
+  <meta name="twitter:description" content="Kleine ASCII-Tiere mit wechselnden Gegenständen zum Anschauen und Kopieren.">
+  <meta name="twitter:image" content="https://marsrakete.github.io/ascii-tierchen/og-image.png">
+  <meta name="twitter:image:alt" content="ASCII Tierchen mit einem Hasen und einem blauen Eiswürfel.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div>
+  <div class="animal-display">
     <h1>ASCII Tierchen</h1>
     <h2 id="animal-name">bunny</h2>
     <pre id="ascii-art">
@@ -69,7 +55,7 @@
     ];
 
     const animalList = [
-      'bunny', 'cat', 'dog', 'duck', 'mouse', 'frog', 'bear', 'snail', 'owl',
+      'bunny', 'cat', 'donkey', 'duck', 'mouse', 'frog', 'bear', 'snail', 'owl',
       'tiger', 'penguin', 'crab', 'elephant'
     ];
 
@@ -78,11 +64,11 @@
 (•_•)
 / >${item}`,
 
-      cat: (item) => `=^.^=
-( o.o )
- >${item}`,
+      cat: (item) => ` /\\_/\\
+(=^.^=)
+ (${item})~`,
 
-      dog: (item) => `^__^
+      donkey: (item) => `^__^
 (oo)\\_______
 (__)\\       )\\
     ||----w |
@@ -93,17 +79,22 @@
  ( ._>  ${item}
   \\___)` ,
 
-      mouse: (item) => `(' .')
-(o_o )
-(")(") ${item}`,
+      mouse: (item) => ` (o)_(o)
+ ( . . )
+  \\_v_/
+  (${item})~~`,
 
       frog: (item) => ` @..@
 (----)
 ( >${item} )
  ^^ ^^`,
 
-      bear: (item) => `ʕ•ᴥ•ʔ
-(  ${item}  )`,
+      bear: (item) => `  (o)---(o)
+  /  . .  \\
+ |  ( Y )  |
+  \\  \`-'  /
+  / ( ${item} ) \\
+ (___) (___)`,
 
       snail: (item) => `  _____
  /     \\
@@ -113,11 +104,11 @@ o\\_^_/o ${item}`,
       owl: (item) => ` ,_,
 (o,o)
 (   )
-"-" ${item}`,
+ "${item}"`,
 
-      tiger: (item) => `/\_/\
-( o.o )
- > ^ < ${item}`,
+      tiger: (item) => `  /\\_/\\
+ ( o.o )
+  > ^ < ${item}`,
 
       penguin: (item) => `  _~_
  (o o)
@@ -125,14 +116,16 @@ o\\_^_/o ${item}`,
 /(   )\\
  ^^ ^^ ${item}`,
 
-      crab: (item) => `  (\_/)
- (o.o)
- <) )> ${item}`,
+      crab: (item) => ` \\ /  o  o  \\ /
+  V   |  |   V
+   \\_/----\\_/
+    /______\\
+    / /  \\ \\  ${item}`,
 
       elephant: (item) => `  _.-- ,.--.
  .'   .'     /
  | @       |'..--------._
- /      \\._/              '\
+ /      \\._/              '\\
 /  .-.-                     \\
 \\_/   ${item}`
     };
@@ -150,7 +143,16 @@ o\\_^_/o ${item}`,
     function updateArt() {
       const animalKey = animalList[currentAnimalIndex];
       const art = animals[animalKey](currentItem);
-      document.getElementById('ascii-art').textContent = art;
+      const artDisplay = document.getElementById('ascii-art');
+      artDisplay.textContent = art;
+      if (animalKey === 'owl') {
+        const feetStart = art.lastIndexOf('\n') + 1;
+        const feet = document.createElement('span');
+        feet.className = 'owl-feet';
+        feet.textContent = art.slice(feetStart);
+        artDisplay.textContent = art.slice(0, feetStart);
+        artDisplay.append(feet);
+      }
       document.getElementById('animal-name').textContent = animalKey;
     }
 
